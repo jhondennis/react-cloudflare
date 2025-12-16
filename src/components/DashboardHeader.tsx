@@ -17,7 +17,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   children,
 }) => {
   return (
-    <AppBar color="default" position="fixed" enableColorOnDark>
+    <AppBar color="primary" position="fixed">
       <Toolbar sx={{ mx: { xs: 1, sm: 3 } }}>
         <Stack
           direction="row"

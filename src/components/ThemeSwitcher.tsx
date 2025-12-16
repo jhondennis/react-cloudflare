@@ -14,7 +14,7 @@ export const ThemeSwitcher = () => {
 
   return (
     <Tooltip title={`${darkMode ? "Light" : "Dark"} mode`} enterDelay={1000}>
-      <IconButton size="small" onClick={toggleMode}>
+      <IconButton size="small" onClick={toggleMode} sx={{ color: "inherit" }}>
         {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
       </IconButton>
     </Tooltip>
