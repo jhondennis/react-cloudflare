@@ -1,4 +1,4 @@
-import { useMatches, Link as RouterLink, Params } from "react-router";
+import { useMatches, Link as RouterLink, Params, UIMatch } from "react-router";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
@@ -7,13 +7,13 @@ export interface RouteHandle {
   crumb?: (data: Params) => React.ReactNode;
 }
 
-interface MatchWithHandle {
-  id: string;
-  pathname: string;
-  params: Params;
-  data: unknown;
+interface MatchWithHandle extends UIMatch {
   handle: RouteHandle;
 }
+
+// AUN ESTOY PROBANDO ESTA FUNCIONALIDAD
+// PARECE SER QUE SOLO FUNCIONA
+// En Modo DATA de react router y no en el clasico DECLARATIVO
 
 export const BreadcrumbsCustom = () => {
   const matches = useMatches() as MatchWithHandle[];

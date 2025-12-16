@@ -7,12 +7,11 @@ import Button from "@mui/material/Button";
 
 import { DashboardHeader } from "@/components";
 import { useSessionStore } from "@/store";
-import { listLinks } from "../listLinks";
+import { listLinks, listPublicLinks } from "../listLinks";
 
 const ButtonLink = ({ title, to }: { title: string; to: string }) => {
   return (
     <Button
-      variant="text"
       component={Link}
       to={to}
       sx={{ color: "inherit", textDecoration: "none" }}
@@ -23,17 +22,17 @@ const ButtonLink = ({ title, to }: { title: string; to: string }) => {
 };
 
 export const PublicLayout: React.FC = () => {
-  const { session, setSession } = useSessionStore();
+  const { session } = useSessionStore();
   return (
     <>
       <DashboardHeader title="Public Layout (Public)">
-        {session ? (
-          listLinks.map(link => (
-            <ButtonLink key={link.to} title={link.title} to={link.to} />
-          ))
-        ) : (
-          <Button onClick={() => setSession(true)}>Login</Button>
-        )}
+        {session
+          ? listLinks.map(link => (
+              <ButtonLink key={link.to} title={link.title} to={link.to} />
+            ))
+          : listPublicLinks.map(link => (
+              <ButtonLink key={link.to} title={link.title} to={link.to} />
+            ))}
       </DashboardHeader>
 
       <Toolbar sx={{ displayPrint: "none" }} />

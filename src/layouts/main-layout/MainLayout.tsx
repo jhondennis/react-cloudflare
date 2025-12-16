@@ -28,12 +28,15 @@ export const MainLayout: React.FC = () => {
 
   return (
     <>
-      <DashboardHeader title="Dashboard Layout  asdasd(Private)">
+      <DashboardHeader color="secondary" title="Dashboard Layout (Private)">
         <>
           {listLinks.map(link => (
             <ButtonLink key={link.to} title={link.title} to={link.to} />
           ))}
-          <IconButton onClick={() => setSession(false)}>
+          <IconButton
+            sx={{ color: "inherit" }}
+            onClick={() => setSession(false)}
+          >
             <LogoutIcon />
           </IconButton>
         </>

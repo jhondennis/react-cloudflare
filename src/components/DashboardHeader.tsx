@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-import AppBar from "@mui/material/AppBar";
+import AppBar, { AppBarTypeMap } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -10,14 +10,16 @@ import { ROUTES } from "@/constants";
 
 interface DashboardHeaderProps extends React.PropsWithChildren {
   title?: string;
+  color?: AppBarTypeMap["props"]["color"];
 }
 
 export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   title,
   children,
+  color = "primary",
 }) => {
   return (
-    <AppBar color="primary" position="fixed">
+    <AppBar color={color} position="fixed">
       <Toolbar sx={{ mx: { xs: 1, sm: 3 } }}>
         <Stack
           direction="row"
