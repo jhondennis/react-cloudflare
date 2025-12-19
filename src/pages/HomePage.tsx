@@ -2,6 +2,8 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import { envs } from "@/env";
+
 export default function HomePage() {
   return (
     <Container maxWidth="md">
@@ -21,6 +23,10 @@ export default function HomePage() {
 
         <Typography variant="body1" sx={{ mb: 3 }}>
           Esta es una home page sencilla hecha con React y MUI.
+        </Typography>
+
+        <Typography variant="body1" sx={{ mb: 3 }}>
+          API_URL: {envs?.API_URL || ""} prueba de env runtime
         </Typography>
       </Box>
     </Container>

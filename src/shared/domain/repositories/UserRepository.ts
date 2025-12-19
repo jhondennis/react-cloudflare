@@ -1,4 +1,4 @@
-import { User } from "@/models";
+import { User } from "@/shared";
 
 export interface UserRepository {
   getUsers(): Promise<User[]>;

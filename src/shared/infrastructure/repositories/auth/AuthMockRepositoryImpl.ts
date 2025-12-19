@@ -1,4 +1,4 @@
-import { Session } from "@/models";
+import { Session } from "@/shared";
 import { AuthMockRepository } from "@/shared/domain";
 
 export class AuthMockRepositoryImpl implements AuthMockRepository {

@@ -1,4 +1,4 @@
-import { User } from "@/models";
+import { User } from "@/shared";
 import { UserRepository } from "@/shared/domain";
 
 export class UserRepositoryImpl implements UserRepository {
