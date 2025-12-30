@@ -5,4 +5,4 @@ set -e
 envsubst < /usr/share/nginx/html/env.template.js > /usr/share/nginx/html/env.js
 
 # Arranca nginx
-nginx -g "daemon off;"
+exec nginx -g "daemon off;"
