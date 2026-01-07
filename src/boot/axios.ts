@@ -1,9 +1,9 @@
+import { envs } from "@/envs";
 import Axios, {
   AxiosError,
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { envs } from "../env";
 
 const axios = Axios.create({
   baseURL: envs.API_URL,
