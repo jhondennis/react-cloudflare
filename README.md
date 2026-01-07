@@ -1,45 +1,35 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite Container Project
 
-Prueba de un contenedor de react con vite
+This project demonstrates a robust setup for a React application using **Vite** and **TypeScript**, containerized with **Docker** (using Bun and Nginx), and featuring granular routing management.
 
-## Expanding the ESLint configuration
+## Project Functionality
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The application serves as a dashboard with authentication management. Key features include:
 
-- Configure the top-level `parserOptions` property like this:
+-   **Tech Stack**: React 18, TypeScript, Vite.
+-   **State Management**: Zustand for global state (e.g., session management).
+-   **Styling**: Material UI (MUI) & Emotion.
+-   **HTTP Client**: Axios.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Containerization
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+The project uses a multi-stage **Docker** build process optimized for performance and size:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1.  **Build Stage**: Uses `oven/bun:1.3.0-alpine` to install dependencies and build the application. It utilizes specific cache layers (`package.json`, `bun.lock`) to speed up rebuilds.
+2.  **Runtime Stage**: Uses `nginx:1.27-alpine` to serve the static assets.
+    -   Custom `nginx.conf` for optimized caching and routing fallback (SPA support).
+    -   Environment variable injection at runtime using an entrypoint script (`env.sh`) to support "build once, deploy anywhere" patterns.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+**Key Files:**
+-   `Containerfile`: Defines the multi-stage build.
+-   `compose.yml`: Docker Compose configuration for local development.
+
+## Routing
+
+Routing is handled by **React Router v7**, structured for scalability and security:
+
+-   **Router Provider**: Centrally managed in `src/router/ReactRouterProvider.tsx`.
+-   **Middleware**: Protected routes are wrapped in a `MiddlewareRoute` component that checks for authentication (via `useSessionStore`) and redirects accordingly.
+    -   `PublicLayout`: For public pages (Home, Access Denied).
+    -   `MainLayout`: For authenticated dashboard pages.
+-   **Lazy Loading**: Routes are lazy-loaded (`lazy(() => import(...))`) to optimize initial bundle size. Suspense checks are handled via a `withSuspense` utility.
