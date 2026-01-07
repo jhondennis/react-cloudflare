@@ -33,3 +33,22 @@ Routing is handled by **React Router v7**, structured for scalability and securi
     -   `PublicLayout`: For public pages (Home, Access Denied).
     -   `MainLayout`: For authenticated dashboard pages.
 -   **Lazy Loading**: Routes are lazy-loaded (`lazy(() => import(...))`) to optimize initial bundle size. Suspense checks are handled via a `withSuspense` utility.
+
+## CI/CD & Deployment
+
+The project uses **GitHub Actions** for Continuous Integration and Continuous Deployment (CI/CD), automatically deploying to **Cloudflare Pages**.
+
+### Workflow: `.github/workflows/ci.yml`
+
+-   **Triggers**:
+    -   Pushes to `develop`.
+    -   Pull Requests to `develop`, `test`, `main` (when closed and merged).
+-   **Build Process**:
+    -   Runs on `ubuntu-latest`.
+    -   Sets up **Bun** (v1.3.0).
+    -   Installs dependencies and builds the project using `bun run build`.
+-   **Deployment**:
+    -   Uses **Wrangler** to deploy the `dist` folder to Cloudflare Pages.
+    -   Deploys to a specific branch environment based on the event (PR base ref or branch name).
+    -   **Secrets**: Requires `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets in the GitHub repository.
+
