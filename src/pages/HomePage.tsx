@@ -28,6 +28,10 @@ export default function HomePage() {
         <Typography variant="body1" sx={{ mb: 3 }}>
           API_URL: {envs?.API_URL || "Sin env"} prueba de env runtime
         </Typography>
+
+        <Typography variant="body1" sx={{ mb: 3 }}>
+          APP_NAME: {envs?.APP_NAME || "Sin env"} prueba de env runtime
+        </Typography>
       </Box>
     </Container>
   );
